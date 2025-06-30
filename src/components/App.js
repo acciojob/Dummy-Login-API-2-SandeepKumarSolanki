@@ -30,7 +30,7 @@ const App = () => {
     }
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} id="submit-form-btn">
                 <input
                     type='email'
                     placeholder='Enter you email'
