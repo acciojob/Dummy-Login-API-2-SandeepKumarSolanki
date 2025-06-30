@@ -10,8 +10,12 @@ const App = () => {
     const [passwordError, setPasswordError] = useState('')
     const [login , setLogin] = useState(false)
     const handleSubmit = (e) => {
+        e.preventDefault();
+        setEmailError('')
+        setPasswordError('')
+        setLogin(false)
         setTimeout(() => {
-            e.preventDefault();
+            
             if (email.trim() && email !== dummyData.email) {
                 setEmailError("User not found")
                 return;
@@ -30,7 +34,7 @@ const App = () => {
     }
     return (
         <>
-            <form onSubmit={handleSubmit} id="submit-form-btn">
+            <form onSubmit={handleSubmit} >
                 <input
                     type='email'
                     placeholder='Enter you email'
@@ -45,12 +49,12 @@ const App = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     id="input-password"
                 />
-                <button type='submit' id="submit-from-btn">Submit</button>
+                <button type='submit' id="submit-form-btn">Submit</button>
             </form>
 
             {
                 emailError.length > 0 && (
-                    <p id="email-error">{emailError}</p>
+                    <p id="user-error">{emailError}</p>
                 )
             }
             {
