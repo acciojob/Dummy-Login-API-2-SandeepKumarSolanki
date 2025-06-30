@@ -5,67 +5,70 @@ const dummyData = {
 }
 const App = () => {
     const [email, setEmail] = useState('')
-    const [emailError, setEmailError] = useState('')
+    const [userError, setUserError] = useState('')
     const [password, setPassword] = useState('')
-    const [passwordError, setPasswordError] = useState('')
-    const [login , setLogin] = useState(false)
+    const [error, setError] = useState('')
+    const [login, setLogin] = useState(false)
+
+    
     const handleSubmit = (e) => {
         e.preventDefault();
-        setEmailError('')
-        setPasswordError('')
+        setUserError('')
+        setError('')
         setLogin(false)
         setTimeout(() => {
-            
+
             if (email.trim() && email !== dummyData.email) {
-                setEmailError("User not found")
+                setUserError("User not found")
                 return;
             }
             if (password !== dummyData.password) {
-                setPasswordError("Password Incorrect")
+                setError("Password Incorrect")
                 return;
             }
             setLogin(true)
-            console.log(email, password , "Login Successfully")
+            console.log(email, password, "Login Successfully")
             setEmail('')
             setPassword('')
-            setEmailError('')
-            setPasswordError('')
-        },3000)
+            setUserError('')
+            setError('')
+        }, 3000)
     }
+
+    
     return (
         <>
-            <form onSubmit={handleSubmit} >
-                <input
-                    type='email'
-                    placeholder='Enter you email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    id="input-email"
-                />
-                <input
-                    type="password"
-                    value={password}
-                    placeholder='Enter your password'
-                    onChange={(e) => setPassword(e.target.value)}
-                    id="input-password"
-                />
-                <button type='submit' id="submit-form-btn">Submit</button>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Email:</label>
+                    <input
+                        id="input-email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                        }}
+                    />
+                    {userError && <p id="user-error" style={{ color: "red" }}>{userError}</p>}
+                </div>
+
+                <div>
+                    <label>Password:</label>
+                    <input
+                        id="input-password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                        }}
+                    />
+                    {error && <p id="password-error" style={{ color: "red" }}>{error}</p>}
+                </div>
+
+                <button id="submit-form-btn" type="submit" >
+                    {login ? "Logging in..." : "Login"}
+                </button>
             </form>
-
-            {
-                emailError.length > 0 && (
-                    <p id="user-error">{emailError}</p>
-                )
-            }
-            {
-                passwordError.length > 0 && (
-                    <p id="password-error">{passwordError}</p>
-                )
-            }
-            {login && (
-                <p id="login">Login successfully</p>
-            )}
-
         </>
     )
 }
