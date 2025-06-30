@@ -34,18 +34,20 @@ const App = () => {
       }
 
       // ✅ Successful login
-      setUserError("");
-      setPasswordError("");
+      
       alert("Login successful!");
+
       setEmail("");
       setPassword("");
+      setUserError("");
+      setPasswordError("");
     }, 3000);
   };
 
-  const handleInputChange = () => {
-    setUserError("");
-    setPasswordError("");
-  };
+//   const handleInputChange = () => {
+//     setUserError("");
+//     setPasswordError("");
+//   };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -56,7 +58,6 @@ const App = () => {
           type="email"
           value={email}
           onChange={(e) => {
-            handleInputChange();
             setEmail(e.target.value);
           }}
         />
@@ -70,7 +71,6 @@ const App = () => {
           type="password"
           value={password}
           onChange={(e) => {
-            handleInputChange();
             setPassword(e.target.value);
           }}
         />
