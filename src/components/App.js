@@ -70,7 +70,7 @@ const App = () => {
           onChange={handleEmailChange}
         />
         {/* Always render for Cypress */}
-        <p id="user-error" style={{ color: 'red' }}>{userError}</p>
+        <h1 id="user-error" style={{ color: 'red' }}>{userError}</h1>
       </div>
 
       <div>
@@ -82,7 +82,7 @@ const App = () => {
           onChange={handlePasswordChange}
         />
         {/* Always render for Cypress */}
-        <p id="password-error" style={{ color: 'red' }}>{passwordError}</p>
+        <h1 id="password-error" style={{ color: 'red' }}>{passwordError}</h1>
       </div>
 
       <button id="submit-form-btn" type="submit" disabled={isLoading}>
