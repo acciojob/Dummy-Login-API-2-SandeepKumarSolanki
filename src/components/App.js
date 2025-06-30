@@ -18,7 +18,7 @@ const App = () => {
         setLogin(false)
         setTimeout(() => {
 
-            if (email.trim() && email !== dummyData.email) {
+            if (email !== dummyData.email) {
                 setUserError("User not found")
                 return;
             }
