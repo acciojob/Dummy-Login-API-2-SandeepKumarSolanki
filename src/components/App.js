@@ -14,40 +14,50 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // clear old errors
     setUserError("");
     setPasswordError("");
     setIsLoading(true);
 
     setTimeout(() => {
+      // simulate async validation
       setIsLoading(false);
 
       if (email !== dummyData.email) {
         setUserError("User not found");
-        setPasswordError("");
+        setPasswordError(""); // make sure password error is cleared
         return;
       }
 
       if (password !== dummyData.password) {
-        setUserError("");
+        setUserError(""); // clear user error
         setPasswordError("Password Incorrect");
         return;
       }
 
-      // ✅ Successful login
-      
-      alert("Login successful!");
-
-      setEmail("");
-      setPassword("");
+      // ✅ success: clear all errors first
       setUserError("");
       setPasswordError("");
+
+      // ✅ Optional: wait a tick to allow DOM to update (for Cypress)
+      setTimeout(() => {
+        alert("Login successful!");
+        setEmail("");
+        setPassword("");
+      }, 0);
     }, 3000);
   };
 
-//   const handleInputChange = () => {
-//     setUserError("");
-//     setPasswordError("");
-//   };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setUserError(""); // clear errors on change
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setPasswordError(""); // clear errors on change
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -57,10 +67,9 @@ const App = () => {
           id="input-email"
           type="email"
           value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
+          onChange={handleEmailChange}
         />
+        {/* Always render for Cypress */}
         <p id="user-error" style={{ color: 'red' }}>{userError}</p>
       </div>
 
@@ -70,10 +79,9 @@ const App = () => {
           id="input-password"
           type="password"
           value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          onChange={handlePasswordChange}
         />
+        {/* Always render for Cypress */}
         <p id="password-error" style={{ color: 'red' }}>{passwordError}</p>
       </div>
 
