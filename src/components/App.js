@@ -18,24 +18,27 @@ const App = () => {
 
         setTimeout(() => {
             setIsLoading(false);
-
-            // Check user email
+          
             if (email !== dummyData.email) {
-                setUserError("User not found");
-                return;
+              setUserError("User not found");
+              setPasswordError("");
+              return;
             }
-
-            // Check password
+          
             if (password !== dummyData.password) {
-                setPasswordError("Password Incorrect");
-                return;
+              setUserError("");
+              setPasswordError("Password Incorrect");
+              return;
             }
-
-            // On successful login
+          
+            // Successful login
+            setUserError("");
+            setPasswordError("");
             alert("Login successful!");
             setEmail("");
             setPassword("");
-        }, 3000);
+          }, 3000);
+          
     };
 
     const handleInputChange = () => {
@@ -56,7 +59,7 @@ const App = () => {
                         setEmail(e.target.value);
                     }}
                 />
-                {userError && <p id="user-error" style={{ color: "red" }}>{userError}</p>}
+                {userError && <p id="user-error" style={{ color: 'red' }}>{userError}</p>}
             </div>
 
             <div>
@@ -70,7 +73,7 @@ const App = () => {
                         setPassword(e.target.value);
                     }}
                 />
-                {passwordError && <p id="password-error" style={{ color: "red" }}>{passwordError}</p>}
+                {passwordError && <p id="password-error" style={{ color: 'red' }}>{passwordError}</p>}
             </div>
 
             <button id="submit-form-btn" type="submit" disabled={isLoading}>
